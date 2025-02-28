@@ -1,8 +1,5 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import '../styles/global.css';
-
+import BaseLayout from '../layouts/BaseLayout.astro';
 const pageTitle = "私について";
 
 const identity = {
@@ -23,11 +20,7 @@ const fontWeight = "bold";
 const textCase = "uppercase";
 ---
 
-<!-- <Layout>
-	<Welcome />
-</Layout> -->
-
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -36,7 +29,7 @@ const textCase = "uppercase";
     <title>{pageTitle}</title>
     <style define:vars={{skillColor, fontWeight, textCase}}>
       h1 {
-        color: purple;
+        color: rgb(51, 170, 73);
         font-size: 4rem;
       }
       .skill {
@@ -47,8 +40,7 @@ const textCase = "uppercase";
     </style>
   </head>
 
-  <body>
-    <Header />
+  <BaseLayout pageTitle={pageTitle}>
 
     <h1>私のAstroサイト</h1>
     <h1>{pageTitle}</h1>
@@ -77,10 +69,4 @@ const textCase = "uppercase";
 
     {goal === 3 ? <p>My goal is to finish in 3 days. 3日で終えるのが目標です。</p> : <p>My goal is not 3 days. 3日が目標ではありません。</p>}
 
-    <Footer />
-
-    <script>
-      import "../scripts/menu.js";
-    </script>
-  </body>
-</html>
+  </BaseLayout>
