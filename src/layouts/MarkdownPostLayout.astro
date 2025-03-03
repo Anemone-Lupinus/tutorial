@@ -1,23 +1,38 @@
 ---
+// @ts-nocheck
 import BaseLayout from './BaseLayout.astro';
 const { frontmatter } = Astro.props;
 ---
-<html lang="ja">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{frontmatter.title}</title>
-  </head>
 
-  <body>
+<BaseLayout pageTitle={frontmatter.title}>
+  <p>投稿日: {frontmatter.pubDate.toString().slice(0,10)}</p>
+  <p>著者: {frontmatter.author}</p>
+  <div class="tags">
+    {frontmatter.tags.map((tag) => (
+      <p class="tag"><a href={`/tags/${tag}`}>{tag}</a></p>
+    ))}
+  </div>
+  <article>
+    <slot />
+  </article>
+</BaseLayout>
 
-    <BaseLayout pageTitle={frontmatter.title}>
-    <p>投稿日: {frontmatter.pubDate.toString().slice(0,10)}</p>
-    <p>著者: {frontmatter.author}</p>
-    <article>
-      <slot />
-    </article>
-    </BaseLayout>
+<style>
+  a {
+    color: #00539F;
+  }
 
-  </body>
-</html>
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    margin: 0.25em;
+    border: dotted 1px #a1a1a1;
+    border-radius: .5em;
+    padding: .5em 1em;
+    font-size: 1.15em;
+    background-color: #F8FCFD;
+  }
+</style>
